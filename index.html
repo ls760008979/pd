@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>配电项目</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/swiper-4.1.0.min.css">
+    <!--<link rel="stylesheet" href="css/aui.css">-->
+   <!-- <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">-->
+</head>
+<body style="width: 3840px;height: 2160px;opacity: 1;background-repeat:repeat;"
+      resize>
+<div v-cloak class="main" style="position:relative;" id="form">
+    <img src="img/bg2.png" style="width: 100%;position: absolute;left:0;top: 0;z-index: -1">
+    <div class="contain" v-for="list in lists">
+        <div class="title  ">{{list.title}}</div>
+        <div class="alert" >
+            <div class="alert-c" v-for="item in list.alert">
+                <div style="flex-grow: 1">{{item.v}}</div>
+                <div style="flex-grow: 1">190-230</div>
+                <div style="flex-grow: 2">{{item.float}}</div>
+                <div style="flex-grow: 2">{{item.float_max}}</div>
+            </div>
+        </div>
+        <div class="fh">
+            <div class="fh-h">
+                <div>实时：{{list.fuhe.ss}}</div>
+                <div>去年今日：{{list.fuhe.qt}}</div>
+                <div>频率：{{list.fuhe.f}}</div>
+            </div>
+            <div style="width: 1141px;height: 503px;margin-left: 20px;margin-top: 120px" id="chart1"></div>
+            <div class="fh_data">
+                <div class="t-data">
+                    <div class="dd">
+                        <div>最大：{{list.fuhe.t_max}}kW</div>
+                        <div>最小：{{list.fuhe.t_min}}kW</div>
+                    </div>
+                    <div class="dt">
+                        <div>时间：{{list.fuhe.t_1}}</div>
+                        <div>时间：{{list.fuhe.t_2}}</div>
+                    </div>
+                </div>
+                <div class="y-data">
+                    <div class="dd">
+                        <div>最大：{{list.fuhe.y_max}}kW</div>
+                        <div>最小：{{list.fuhe.y_min}}kW</div>
+                    </div>
+                    <div class="dt">
+                        <div>时间：{{list.fuhe.y_1}}</div>
+                        <div>时间：{{list.fuhe.y_2}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fz">
+            <div class="fz-bt">
+                <div class="tab-btn swiper-pagination"  id="tab-table"  style="font-size: 35px;">
+
+                </div>
+            </div>
+            <div class="fz-bott swiper-container"  >
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide swiper-slide-active swiper-no-swiping" >
+                        <div class="fz-1 swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="fz-data swiper-slide " v-for="(item,index) in list.line">
+                                    <div class="top-name">额定：{{item.ed}}</div>
+                                    <div class="fz-pro " >
+                                        <svg  width="220" height="460"  style="background-image:url('img/bottom.png')">
+                                            <defs>
+                                                <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <stop offset="30%" style="stop-color:green;stop-opacity:0.6" />
+                                                    <stop offset="80%" style="stop-color:black;stop-opacity:0.2" />
+                                                </linearGradient>
+                                                <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <stop offset="30%" style="stop-color:#fff45c;stop-opacity:0.6" />
+                                                    <stop offset="80%" style="stop-color:black;stop-opacity:0.2" />
+                                                </linearGradient>
+                                                <linearGradient id="grad3" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <stop offset="30%" style="stop-color:#a40000;stop-opacity:0.6" />
+                                                    <stop offset="80%" style="stop-color:black;stop-opacity:0.2" />
+                                                </linearGradient>
+                                            </defs>
+                                            <rect :id="'fz'+index" x="5" y="5" rx="20" ry="20" width="210" height="460" fill="url(#grad1)" />
+                                            <text  :id="'ft'+index" fill="#ffffff" font-size="25" font-family="Verdana" x="85" >{{item.data}}</text>
+                                        </svg>
+                                    </div>
+                                    <div class="bot-name">{{item.name}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide swiper-no-swiping" >
+                        <div class="fz-1 swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="fz-data swiper-slide" v-for="(item,index) in list.byq">
+                                    <div class="top-name">额定：{{item.ed}}</div>
+                                    <div class="fz-pro " >
+                                        <svg  width="220" height="460"  style="background-image:url('img/bottom.png')">
+                                            <defs>
+                                                <linearGradient id="gradt1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <stop offset="30%" style="stop-color:green;stop-opacity:0.6" />
+                                                    <stop offset="80%" style="stop-color:black;stop-opacity:0.2" />
+                                                </linearGradient>
+                                                <linearGradient id="gradt2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <stop offset="30%" style="stop-color:#fff45c;stop-opacity:0.6" />
+                                                    <stop offset="80%" style="stop-color:black;stop-opacity:0.2" />
+                                                </linearGradient>
+                                                <linearGradient id="gradt3" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <stop offset="30%" style="stop-color:#a40000;stop-opacity:0.6" />
+                                                    <stop offset="80%" style="stop-color:black;stop-opacity:0.2" />
+                                                </linearGradient>
+                                            </defs>
+                                            <rect :id="'fb'+index" x="5" y="5" rx="20" ry="20" width="210" height="460" fill="url(#gradt1)" />
+                                            <text  :id="'fby'+index" fill="#ffffff" font-size="25" font-family="Verdana" x="85" >{{item.data}}</text>
+                                        </svg>
+                                    </div>
+                                    <div class="bot-name">{{item.name}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="state">
+             <div class="s-tb" v-for="item in list.state">
+                <div>{{item.date}}</div>
+                 <div>{{item.line}}</div>
+                 <div>{{item.content}}</div>
+                 <div>{{item.st}}</div>
+                 <div>{{item.ct}}</div>
+                 <div>{{item.bz}}</div>
+             </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="js/echarts.min.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/swiper-4.1.0.min.js"></script>
+<script src="js/vue.js"></script>
+<!--<script src="js/aui-tab.js"></script>-->
+<script src="js/common.js"></script>
+<script>
+    //页面等比例缩放
+    (function () {
+        var body = $("body"),
+            win = $(window),
+            main = $("#main");
+        var resizePage = function () {
+            var bodyWidth = body.width(),
+                winWidth = win.width(),
+                bodyHeight = body.height(),
+                scale = winWidth / bodyWidth;
+            body.css('transform', 'scale(' + scale + ')');
+//            main.css('transform', 'scale(' + scale + ')');
+        };
+        if (typeof body.attr('resize') !== 'undefined') {
+            resizePage();
+            win.resize(resizePage);
+        }
+    })();
+</script>
+</body>
+</html>
